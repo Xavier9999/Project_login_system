@@ -1,0 +1,10 @@
+QGroupBox {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 1.5em; /*the bigger the closer to the top*/
+  }
+QGroupBox:title{
+    background-color: rgb(0, 255, 55);
+    subcontrol-origin: margin; /*activate margin-top*/
+    subcontrol-position: top center;
+  }
