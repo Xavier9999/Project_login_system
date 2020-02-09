@@ -11,14 +11,16 @@ class Window(QWidget):
         super().__init__()
         self.title = "Password Keeper"
         self.icon = 'Login.png'
-        self.top = 400
         self.left = 800
+        self.top = 400
         self.width = 300
-        self.height = 150
+        self.height = 300
+        self.setMaximumSize(300, 300)
         self.init_window()
 
     def init_window(self):
-        """User form Label creation"""
+        """Main window widgets creation"""
+        # Label content creation
         u_label = QLabel('<font size="4">Username</font>')
         p_label = QLabel('<font size="4">Password</font>')
         self.u_lineedit = QLineEdit()
@@ -64,7 +66,7 @@ class Window(QWidget):
 
 if __name__ == "__main__":
     APP = QApplication(sys.argv)
-    STYLE = '/Users/xavierchu/Documents/Coding/VScode/Python/Python/Projects/Password_keeper/resources/main_window_style.css'
+    STYLE = '/Users/xavierchu/Documents/Coding/VScode/Python/Projects/Password_keeper/resources/main_window_style.css'
     with open(STYLE, "r") as fh:
         APP.setStyleSheet(fh.read())
     WINDOW = Window()
