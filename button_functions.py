@@ -1,25 +1,30 @@
 """SQL database functions"""
 import MySQLdb as mysql
+from login_failed import LoginFailed
 
 
 class ButtonClicked:
     """Set button class"""
-    def __init__(self, host, user, passwd, login_db):
-        self.host = host
-        self.user = user
-        self.passwd = passwd
+    def __init__(self, login_db):
+        self.host = "localhost"
+        self.user = "root"
+        self.passwd = "Yaoming229"
         self.login_db = login_db
+        self.failed_ui = None
 
-    def login(self):
-        """Login button for main page"""
+    def connect_db(self):
         conn = mysql.Connect(host=self.host, user=self.user, passwd=self.passwd, db=self.login_db)
         cursor = conn.cursor()
         # Executing with cursor
         cursor.execute("SELECT * FROM Login_info")
         # Get all the info from the table
         results = cursor.fetchall()
-        print([i for i in results])
-        conn.close()
+        return results
+
+    def login_failed(self):
+        """Login button for main page"""
+        self.failed_ui = LoginFailed()
+        self.failed_ui.show()
 
 
-LOGINCHECK = ButtonClicked("localhost", "root", "Yaoming229", "Password_keeper")
+XAVIER_DB = ButtonClicked("Xavier")

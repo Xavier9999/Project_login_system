@@ -1,7 +1,7 @@
 """Login failed pop-up page"""
 import sys
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QApplication, QDialog, QLabel, QDialogButtonBox, QPushButton, QVBoxLayout, QHBoxLayout
+from PyQt5.QtWidgets import QApplication, QDialog, QLabel, QPushButton, QVBoxLayout, QHBoxLayout
 
 
 class LoginFailed(QDialog):
@@ -13,7 +13,7 @@ class LoginFailed(QDialog):
         self.top = 400
         self.width = 300
         self.height = 150
-        self.setMaximumSize(300, 150)
+        self.setFixedSize(300, 150)
         self.init_dialog()
 
     def init_dialog(self):
@@ -26,7 +26,7 @@ class LoginFailed(QDialog):
         self.close_button = QPushButton("Close")
         # Register and close button connection
         self.register_button.clicked.connect(self.click_register)
-        self.close_button.clocked.connect(self.click_close)
+        self.close_button.clicked.connect(self.click_close)
         # Create button layout
         button_layout = QHBoxLayout()
         button_layout.addWidget(self.register_button)
@@ -48,7 +48,7 @@ class LoginFailed(QDialog):
 
     def click_close(self):
         """Set close function"""
-        pass
+        self.close()
 
 
 if __name__ == "__main__":

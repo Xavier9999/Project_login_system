@@ -1,21 +1,21 @@
 """Main page"""
 import sys
 from PyQt5 import QtGui
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QFormLayout, QGroupBox, QVBoxLayout, QHBoxLayout, QLineEdit
+from PyQt5.QtWidgets import QApplication, QDialog, QLabel, QPushButton, QFormLayout, QGroupBox, QVBoxLayout, QHBoxLayout, QLineEdit
 import button_functions
 
 
-class Window(QWidget):
+class Window(QDialog):
     """Main window attributes"""
     def __init__(self):
         super().__init__()
-        self.title = "Password Keeper"
+        self.title = "Login System"
         self.icon = 'Login.png'
         self.left = 800
         self.top = 400
         self.width = 300
         self.height = 300
-        self.setMaximumSize(300, 300)
+        self.setFixedSize(self.width, self.height)
         self.init_window()
 
     def init_window(self):
@@ -58,7 +58,17 @@ class Window(QWidget):
 
     def click_login(self):
         """Set login function"""
-        button_functions.LOGINCHECK.login()
+        # Retrieve username and password from input
+        username = self.u_lineedit.text()
+        password = self.p_lineedit.text()
+        # Call the Login check functions from button_functions.py
+        results = button_functions.XAVIER_DB.connect_db()
+        for i in results:
+            if username in i and password == i[2]:
+                print("Login succesfull!")
+                break
+            else:
+                button_functions.XAVIER_DB.login_failed()
 
     def click_register(self):
         """Set register function"""
@@ -66,7 +76,7 @@ class Window(QWidget):
 
 if __name__ == "__main__":
     APP = QApplication(sys.argv)
-    STYLE = '/Users/xavierchu/Documents/Coding/VScode/Python/Projects/Password_keeper/resources/main_window_style.css'
+    STYLE = 'resources/main_window_style.css'
     with open(STYLE, "r") as fh:
         APP.setStyleSheet(fh.read())
     WINDOW = Window()
