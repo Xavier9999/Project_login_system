@@ -1,6 +1,7 @@
 """SQL database functions"""
 import MySQLdb as mysql
 from login_failed import LoginFailed
+from register_page import RWindow
 
 
 class ButtonClicked:
@@ -11,8 +12,10 @@ class ButtonClicked:
         self.passwd = "Yaoming229"
         self.login_db = login_db
         self.failed_ui = None
+        self.register_ui = None
 
     def connect_db(self):
+        """Database connect function"""
         conn = mysql.Connect(host=self.host, user=self.user, passwd=self.passwd, db=self.login_db)
         cursor = conn.cursor()
         # Executing with cursor
@@ -21,10 +24,15 @@ class ButtonClicked:
         results = cursor.fetchall()
         return results
 
-    def login_failed(self):
+    def failed_window(self):
         """Login button for main page"""
         self.failed_ui = LoginFailed()
         self.failed_ui.show()
+
+    def register_window(self):
+        """Register button"""
+        self.register_ui = RWindow()
+        self.register_ui.show()
 
 
 XAVIER_DB = ButtonClicked("Xavier")

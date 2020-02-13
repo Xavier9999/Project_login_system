@@ -23,8 +23,11 @@ class Window(QDialog):
         # Label content creation
         u_label = QLabel('<font size="4">Username</font>')
         p_label = QLabel('<font size="4">Password</font>')
+        # Line edit creation
         self.u_lineedit = QLineEdit()
         self.p_lineedit = QLineEdit()
+        # Hide password input
+        self.p_lineedit.setEchoMode(QLineEdit.Password)
         # User form layout
         form_layout = QFormLayout()
         form_layout.addRow(u_label, self.u_lineedit)
@@ -68,10 +71,11 @@ class Window(QDialog):
                 print("Login succesfull!")
                 break
             else:
-                button_functions.XAVIER_DB.login_failed()
+                button_functions.XAVIER_DB.failed_window()
 
     def click_register(self):
         """Set register function"""
+        button_functions.XAVIER_DB.register_window()
 
 
 if __name__ == "__main__":

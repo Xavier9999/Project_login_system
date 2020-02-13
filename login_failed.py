@@ -2,6 +2,7 @@
 import sys
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QApplication, QDialog, QLabel, QPushButton, QVBoxLayout, QHBoxLayout
+import button_functions
 
 
 class LoginFailed(QDialog):
@@ -44,7 +45,7 @@ class LoginFailed(QDialog):
 
     def click_register(self):
         """Set register function"""
-        pass
+        button_functions.XAVIER_DB.register_window()
 
     def click_close(self):
         """Set close function"""
