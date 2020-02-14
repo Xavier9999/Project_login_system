@@ -45,7 +45,7 @@ class LoginFailed(QDialog):
 
     def click_register(self):
         """Set register function"""
-        button_functions.XAVIER_DB.register_window()
+        button_functions.XAVIER_DB.register_ui()
 
     def click_close(self):
         """Set close function"""

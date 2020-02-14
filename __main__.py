@@ -65,13 +65,21 @@ class Window(QDialog):
         username = self.u_lineedit.text()
         password = self.p_lineedit.text()
         # Call the Login check functions from button_functions.py
-        results = button_functions.XAVIER_DB.connect_db()
-        for i in results:
-            if username in i and password == i[2]:
-                print("Login succesfull!")
+        results = button_functions.XAVIER_DB.fetch_db()
+        for i, element in enumerate(results):
+            if username in element and password == element[2]:
+                print("Login successful!")
                 break
-            else:
+            elif username in element and password != element[2]:
                 button_functions.XAVIER_DB.failed_window()
+            elif i == len(results)-1 and username not in element:
+                button_functions.XAVIER_DB.failed_window()
+        # for i in range(len(results)):
+        #     if username in results[i] and password == results[i][2]:
+        #         print("Login successful!")
+        #         break
+        #     elif i == len(results)-1 and username not in results:
+        #         button_functions.XAVIER_DB.failed_window()
 
     def click_register(self):
         """Set register function"""

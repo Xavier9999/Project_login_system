@@ -1,5 +1,7 @@
 """Register Page"""
+from PyQt5 import QtCore
 from PyQt5.QtWidgets import QDialog, QLabel, QLineEdit, QFormLayout, QPushButton, QHBoxLayout, QVBoxLayout
+import button_functions
 
 
 class RWindow(QDialog):
@@ -8,10 +10,10 @@ class RWindow(QDialog):
         super().__init__()
         self.title = "Register"
         self.left = 800
-        self.top = 250
+        self.top = 400
         self.width = 300
-        self.height = 600
-        self.setFixedSize(300, 600)
+        self.height = 300
+        self.setFixedSize(self.width, self.height)
         self.init__register()
 
     def init__register(self):
@@ -29,8 +31,9 @@ class RWindow(QDialog):
         # Create form layout
         form_layout = QFormLayout()
         # Form layout contents
+        form_layout.setFormAlignment(QtCore.Qt.AlignCenter)
         form_layout.addRow(u_label, self.u_lineedit)
-        form_layout.addRow(e_label, self.u_lineedit)
+        form_layout.addRow(e_label, self.e_lineedit)
         form_layout.addRow(p_label, self.p_lineedit)
         # Create buttons
         self.submit_button = QPushButton("Submit")
@@ -38,13 +41,11 @@ class RWindow(QDialog):
         self.close_button = QPushButton("Close")
         # Connect button functions
         self.submit_button.clicked.connect(self.submit)
-        self.login_button.clicked.connect(self.login_window)
-        self.close_button.clicked.connect(self.close)
+        self.close_button.clicked.connect(self.close_window)
         # Create horizontal layout
         h_layout = QHBoxLayout()
         # Horizontal layout contents
         h_layout.addWidget(self.submit_button)
-        h_layout.addWidget(self.login_button)
         h_layout.addWidget(self.close_button)
         # Window layout contents
         win_layout = QVBoxLayout()
@@ -54,17 +55,19 @@ class RWindow(QDialog):
         self.setLayout(win_layout)
         # Set window attributes
         self.setWindowTitle(self.title)
-        self.setGeometry(800, 250, 300, 600)
+        self.setGeometry(self.left, self.top, self.width, self.height)
         self.show()
 
     def submit(self):
         """Submit button"""
-        pass
+        username = self.u_lineedit.text()
+        password = self.p_lineedit.text()
+        email = self.e_lineedit.text()
+        values = (None, username, password, email)
+        button_functions.XAVIER_DB.conn_db(values)
+        results = button_functions.XAVIER_DB.fetch_db()
+        print(results)
 
-    def login_window(self):
-        """Login button"""
-        pass
-
-    def close(self):
+    def close_window(self):
         """Close button"""
         self.close()

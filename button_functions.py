@@ -13,9 +13,17 @@ class ButtonClicked:
         self.login_db = login_db
         self.failed_ui = None
         self.register_ui = None
+        self.main_page = None
 
-    def connect_db(self):
-        """Database connect function"""
+    def conn_db(self, values):
+        """Database fetch function"""
+        conn = mysql.Connect(host=self.host, user=self.user, passwd=self.passwd, db=self.login_db)
+        cursor = conn.cursor()
+        command = "INSERT INTO Login_info VALUES (%s, %s, %s, %s)"
+        cursor.execute(command, values)
+
+    def fetch_db(self):
+        """Database fetch function"""
         conn = mysql.Connect(host=self.host, user=self.user, passwd=self.passwd, db=self.login_db)
         cursor = conn.cursor()
         # Executing with cursor
