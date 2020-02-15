@@ -63,10 +63,11 @@ class RWindow(QDialog):
         username = self.u_lineedit.text()
         password = self.p_lineedit.text()
         email = self.e_lineedit.text()
-        values = (None, username, password, email)
-        button_functions.XAVIER_DB.conn_db(values)
+        values = (username, password, email)
+        button_functions.XAVIER_DB.submit_db(values)
         results = button_functions.XAVIER_DB.fetch_db()
-        print(results)
+        print(results[-1])
+        self.close()
 
     def close_window(self):
         """Close button"""

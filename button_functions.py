@@ -15,22 +15,37 @@ class ButtonClicked:
         self.register_ui = None
         self.main_page = None
 
-    def conn_db(self, values):
+    def submit_db(self, values):
         """Database fetch function"""
-        conn = mysql.Connect(host=self.host, user=self.user, passwd=self.passwd, db=self.login_db)
-        cursor = conn.cursor()
-        command = "INSERT INTO Login_info VALUES (%s, %s, %s, %s)"
-        cursor.execute(command, values)
+        try:
+            try:
+                conn = mysql.Connect(host=self.host, user=self.user, passwd=self.passwd, db=self.login_db)
+                cursor = conn.cursor()
+                command = "INSERT INTO Login_info(Username, Password, Email) VALUES (%s, %s, %s)"
+                cursor.execute(command, values)
+                conn.commit()
+            except(mysql.Error, mysql.Warning) as E:
+                print(E)
+                return None
+        finally:
+            conn.close()
 
     def fetch_db(self):
         """Database fetch function"""
-        conn = mysql.Connect(host=self.host, user=self.user, passwd=self.passwd, db=self.login_db)
-        cursor = conn.cursor()
-        # Executing with cursor
-        cursor.execute("SELECT * FROM Login_info")
-        # Get all the info from the table
-        results = cursor.fetchall()
-        return results
+        try:
+            try:
+                conn = mysql.Connect(host=self.host, user=self.user, passwd=self.passwd, db=self.login_db)
+                cursor = conn.cursor()
+                # Executing with cursor
+                cursor.execute("SELECT * FROM Login_info")
+                # Get all the info from the table
+                results = cursor.fetchall()
+                return results
+            except(mysql.Error, mysql.Warning) as E:
+                print(E)
+                return None
+        finally:
+            conn.close()
 
     def failed_window(self):
         """Login button for main page"""
