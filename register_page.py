@@ -1,6 +1,6 @@
 """Register Page"""
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QDialog, QLabel, QLineEdit, QFormLayout, QPushButton, QHBoxLayout, QVBoxLayout
+from PyQt5.QtWidgets import QDialog, QLabel, QLineEdit, QFormLayout, QPushButton, QHBoxLayout, QVBoxLayout, QGroupBox
 import button_functions
 
 
@@ -35,6 +35,10 @@ class RWindow(QDialog):
         form_layout.addRow(u_label, self.u_lineedit)
         form_layout.addRow(e_label, self.e_lineedit)
         form_layout.addRow(p_label, self.p_lineedit)
+        # Create group box
+        group_box = QGroupBox()
+        group_box.setTitle("Fill in below")
+        group_box.setLayout(form_layout)
         # Create buttons
         self.submit_button = QPushButton("Submit")
         self.login_button = QPushButton("Login")
@@ -49,7 +53,7 @@ class RWindow(QDialog):
         h_layout.addWidget(self.close_button)
         # Window layout contents
         win_layout = QVBoxLayout()
-        win_layout.addLayout(form_layout)
+        win_layout.addWidget(group_box)
         win_layout.addLayout(h_layout)
         # Set window layout
         self.setLayout(win_layout)

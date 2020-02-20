@@ -88,7 +88,7 @@ class Window(QDialog):
 
 if __name__ == "__main__":
     APP = QApplication(sys.argv)
-    STYLE = 'resources/main_window_style.css'
+    STYLE = 'resources/window_style.css'
     with open(STYLE, "r") as fh:
         APP.setStyleSheet(fh.read())
     WINDOW = Window()

@@ -22,6 +22,7 @@ class ButtonClicked:
                 conn = mysql.Connect(host=self.host, user=self.user, passwd=self.passwd, db=self.login_db)
                 cursor = conn.cursor()
                 command = "INSERT INTO Login_info(Username, Password, Email) VALUES (%s, %s, %s)"
+                cursor.execute("ALTER TABLE Login_info AUTO_INCREMENT = 1")
                 cursor.execute(command, values)
                 conn.commit()
             except(mysql.Error, mysql.Warning) as E:
